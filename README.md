@@ -30,7 +30,7 @@ We will need to update the below items items:
 6. QBOBaseURL
 
 ### Client Credentials
-Once you have created an app on Intuit's Developer Portal, you can find your credentials (Client ID and Client Secret) under the "Keys" tab. You will also find a section to enter your Redirect URI here.
+Once you have created an app on Intuit's Developer Portal, you can find your credentials (Client ID and Client Secret) under the "Keys" tab. You will also find a section to enter your Redirect URL here.
 
 ### Redirect URI
 You'll have to set a Redirect URI in both 'web.config' and the Developer Portal ("Keys" section). With this app, the typical value would be https://localhost:47331/, unless you host this sample app in a different way (if you were testing HTTPS, for example or changing the port).
