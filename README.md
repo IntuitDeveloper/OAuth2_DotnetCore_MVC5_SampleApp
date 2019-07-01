@@ -19,7 +19,7 @@ SQL Server
 Clone this repository/Download the sample app.
 
 ## Configuring your app
-All configuration for this app is located in [appsettigs.json](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/OAuth2_CoreMVC_Sample/appsettings.json). Locate and open this file.
+All configuration for this app is located in [appsettings.json](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/OAuth2_CoreMVC_Sample/appsettings.json). Locate and open this file.
 
 We will need to update the below items items:
 1. ClientId
@@ -42,7 +42,7 @@ This sample app requires Accounting scope, please choose this if creating a new 
 This sample app requires database connectivity to store the tokens(AccessToken and RefreshToken) used for doing our API calls and also update the token with new tokens when the token expires.
 
 ## Run your app!
-After setting up both Developer Portal and your [Appsettings.json](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/OAuth2_CoreMVC_Sample/appsettings.json), run the sample app. 
+After setting up both Developer Portal and your [appsettings.json](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/OAuth2_CoreMVC_Sample/appsettings.json), run the sample app. 
 
 ### Connect To QuickBooks 
 This flow goes through authorization flow where QBO user logs in and authorizes your app. At the end of this process, the app will end up with tokens and  if you are a first time user it will create new tokens in the database and if you a recurring user and if your tokens are expired then it will update the database.
