@@ -46,11 +46,9 @@ namespace OAuth2_CoreMVC_Sample.Helper
         /// <summary>
         /// Test QBO api call
         /// </summary>
-        /// <param name="access_token"></param>
-        /// <param name="refresh_token"></param>
-        /// <param name="realmId"></param>
+       
         /// <param name="apiCallFunction"></param>
-        public async System.Threading.Tasks.Task QBOApiCall(Action<ServiceContext> apiCallFunction,string value=null)
+        public async System.Threading.Tasks.Task QBOApiCall(Action<ServiceContext> apiCallFunction)
         {
             OAuth2Client oauthClient = new OAuth2Client(OAuth2Keys.ClientId, OAuth2Keys.ClientSecret, OAuth2Keys.RedirectUrl, OAuth2Keys.Environment);
 

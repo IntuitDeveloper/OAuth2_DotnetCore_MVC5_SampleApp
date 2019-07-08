@@ -43,7 +43,6 @@ namespace OAuth2_CoreMVC_Sample.Controllers
 
      public async Task<IActionResult> CreateCustomer()
         {
-          //  Token token = await _tokens.Token.FirstOrDefaultAsync(t => t.RealmId == OAuth2Keys.RealmId);
 
             Action<ServiceContext> apiCallFucntion = new Action<ServiceContext>(CreateNewCustomer);
             await _services.QBOApiCall(apiCallFucntion);

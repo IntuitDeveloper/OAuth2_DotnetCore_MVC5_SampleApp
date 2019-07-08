@@ -7,6 +7,6 @@ namespace OAuth2_CoreMVC_Sample.Helper
 {
     public interface IServices
     {
-         Task QBOApiCall(Action<ServiceContext> apiCallFunction,string val=null);
+         Task QBOApiCall(Action<ServiceContext> apiCallFunction);
     }
 }
