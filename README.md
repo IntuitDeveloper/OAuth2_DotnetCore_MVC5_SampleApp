@@ -1,6 +1,6 @@
 [![Sample Banner](views/Sample.png)][ss1]
 
-# Oauth2_DotnetCore_MVC5_SampleApp
+# OAuth2_DotnetCore_MVC5_SampleApp
 DotNet Core MVC5 Sample app using .NET Standard SDK
 
 The Intuit Developer team has written this OAuth 2.0 Sample App in .Net Core(C#) MVC5 to provide working examples of OAuth 2.0 concepts, and how to integrate with Intuit endpoints. It uses the Owin Context to save the user cookies for the session.
