@@ -136,7 +136,6 @@ C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreM
 C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\bin\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.pdb
 C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\bin\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.Views.dll
 C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\bin\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.Views.pdb
-C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\obj\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.csprojAssemblyReference.cache
 C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\obj\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.csproj.CoreCompileInputs.cache
 C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\obj\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.RazorAssemblyInfo.cache
 C:\Users\rkasaraneni\Documents\git\Oauth2_DotnetCore_MVC5_SampleApp\OAuth2_CoreMVC_Sample\obj\Debug\netcoreapp2.2\OAuth2_CoreMVC_Sample.RazorAssemblyInfo.cs

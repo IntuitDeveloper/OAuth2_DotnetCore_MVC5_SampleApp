@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "IppDotNetSdkForQuickBooksApiV3/8.0.0": {
+      "IppDotNetSdkForQuickBooksApiV3/8.0.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration": "2.1.1",
@@ -2904,7 +2904,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/12.0.1": {
+      "Newtonsoft.Json/12.0.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -4792,14 +4792,14 @@
     }
   },
   "libraries": {
-    "IppDotNetSdkForQuickBooksApiV3/8.0.0": {
-      "sha512": "bw3zQOCuntTUTyBvDjd3QFoM0Ccp8jr1u0MRdNSp8qdcxF/EDsFWWTzW4QIFk4qOfzSyh00zngEO9Z9sSurDcw==",
+    "IppDotNetSdkForQuickBooksApiV3/8.0.0.3": {
+      "sha512": "21SDOqT64tDsItiOczcUqXgogIKnMBB0aAINaiCWu9Mo2DnaK5ChrK9T0vTttbo08EnHve0kZDQdylO6zyi7YA==",
       "type": "package",
-      "path": "ippdotnetsdkforquickbooksapiv3/8.0.0",
+      "path": "ippdotnetsdkforquickbooksapiv3/8.0.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ippdotnetsdkforquickbooksapiv3.8.0.0.nupkg.sha512",
+        "ippdotnetsdkforquickbooksapiv3.8.0.0.3.nupkg.sha512",
         "ippdotnetsdkforquickbooksapiv3.nuspec",
         "lib/net461/Intuit.Ipp.Core.dll",
         "lib/net461/Intuit.Ipp.Core.pdb",
@@ -8251,42 +8251,33 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/12.0.1": {
-      "sha512": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
+    "Newtonsoft.Json/12.0.2": {
+      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.1",
+      "path": "newtonsoft.json/12.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.pdb",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.pdb",
         "lib/net35/Newtonsoft.Json.xml",
         "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.pdb",
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.pdb",
         "lib/net45/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.pdb",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
-        "lib/netstandard1.3/Newtonsoft.Json.pdb",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
-        "lib/netstandard2.0/Newtonsoft.Json.pdb",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.pdb",
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.pdb",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.1.nupkg.sha512",
+        "newtonsoft.json.12.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
       ]
     },
@@ -13238,11 +13229,15 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "IppDotNetSdkForQuickBooksApiV3 >= 8.0.0",
+      "IppDotNetSdkForQuickBooksApiV3 >= 8.0.0.3",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
+      "Microsoft.Extensions.Configuration >= 2.2.0",
+      "Microsoft.Extensions.Configuration.Json >= 2.2.0",
+      "Microsoft.Extensions.Options >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
+      "Newtonsoft.Json >= 12.0.2",
       "System.ValueTuple >= 4.5.0"
     ]
   },
@@ -13289,7 +13284,7 @@
         "dependencies": {
           "IppDotNetSdkForQuickBooksApiV3": {
             "target": "Package",
-            "version": "[8.0.0, )"
+            "version": "[8.0.0.3, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
@@ -13302,6 +13297,18 @@
             "target": "Package",
             "version": "[2.2.0, )"
           },
+          "Microsoft.Extensions.Configuration": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.Extensions.Configuration.Json": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.Extensions.Options": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -13311,6 +13318,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.2.3, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.2, )"
           },
           "System.ValueTuple": {
             "target": "Package",

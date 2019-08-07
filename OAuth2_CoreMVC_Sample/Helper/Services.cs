@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Intuit.Ipp.Core;
+using Intuit.Ipp.Core.Configuration;
 using Intuit.Ipp.Data;
 using Intuit.Ipp.Exception;
 using Intuit.Ipp.OAuth2PlatformClient;
@@ -29,9 +30,9 @@ namespace OAuth2_CoreMVC_Sample.Helper
         {
             _tokens = tokens;
         }
+     
 
-
-     public async Task<Token> UpdateTokens(string realmId, string newAccessToken, string newRefreshToken)
+        public async Task<Token> UpdateTokens(string realmId, string newAccessToken, string newRefreshToken)
         {
             Token token = await _tokens.Token.FirstOrDefaultAsync(t => t.RealmId == realmId);
             if (token != null)
@@ -60,8 +61,8 @@ namespace OAuth2_CoreMVC_Sample.Helper
                     if (token.AccessToken != null && token.RealmId != null)
                     {
                         OAuth2RequestValidator reqValidator = new OAuth2RequestValidator(token.AccessToken);
-                        ServiceContext context = new ServiceContext(token.RealmId, IntuitServicesType.QBO, reqValidator);
-                        context.IppConfiguration.MinorVersion.Qbo = "38";
+                        JsonFileConfigurationProvider configurationProvider = new JsonFileConfigurationProvider(Directory.GetCurrentDirectory()+"\\appsettings.json");
+                        ServiceContext context = new ServiceContext(token.RealmId, IntuitServicesType.QBO, reqValidator,configurationProvider);
                         apiCallFunction(context);
                     }
                   
