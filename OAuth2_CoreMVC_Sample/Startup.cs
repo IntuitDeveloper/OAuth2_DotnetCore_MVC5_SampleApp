@@ -1,27 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Intuit.Ipp.OAuth2PlatformClient;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Newtonsoft.Json.Linq;
 using OAuth2_CoreMVC_Sample.Helper;
 using OAuth2_CoreMVC_Sample.Models;
 
@@ -34,18 +21,19 @@ namespace OAuth2_CoreMVC_Sample
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public Startup(IHostingEnvironment env, IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             builder.AddUserSecrets<Startup>();
             Configuration = builder.Build();
         }
+
+        public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -57,42 +45,34 @@ namespace OAuth2_CoreMVC_Sample
             });
 
             services.AddDbContext<TokensContext>(options =>
-        options.UseSqlServer(Configuration["DBConnectionString"]));
-           
+                options.UseSqlite("Data Source=QBOTokenStore.db"));
+
             services.AddTransient<IServices, Services>();
             services.Configure<OAuth2Keys>(Configuration.GetSection("OAuth2Keys"));
 
             services.AddMvc();
-            services.AddSingleton<IConfiguration>(provider => Configuration);
+            services.AddSingleton(provider => Configuration);
 
-            services.AddAuthentication(sharedOptions =>
-            {
-                sharedOptions.DefaultChallengeScheme = "QBO";
-            })
-               .AddCookie()
-               .AddOAuth("QBO",options =>
-               {
-                   options.ClientId = OAuth2Keys.ClientId;
-                   options.ClientSecret = OAuth2Keys.ClientSecret;
-                   options.CallbackPath = new PathString("/");
-                   options.AuthorizationEndpoint = OAuth2Keys.AuthURL;
-                   options.TokenEndpoint = OAuth2Keys.AuthURL;
-               
-                   options.SaveTokens = true;
-                   options.Events = new OAuthEvents
-                   {
-                       
-                       OnRedirectToAuthorizationEndpoint =  context =>
-                       {
-                           context.HttpContext.Response.Redirect(context.RedirectUri);
-                           return Task.CompletedTask;
-                       }
-
-                   };
-               });
+            services.AddAuthentication(sharedOptions => { sharedOptions.DefaultChallengeScheme = "QBO"; })
+                .AddCookie()
+                .AddOAuth("QBO", options =>
+                {
+                    options.ClientId = OAuth2Keys.ClientId;
+                    options.ClientSecret = OAuth2Keys.ClientSecret;
+                    options.CallbackPath = new PathString("/");
+                    options.AuthorizationEndpoint = OAuth2Keys.AuthURL;
+                    options.SaveTokens = true;
+                    options.Events = new OAuthEvents
+                    {
+                        OnRedirectToAuthorizationEndpoint = context =>
+                        {
+                            context.HttpContext.Response.Redirect(context.RedirectUri);
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
         }
 
         private void CheckCookies(CookieAuthenticationOptions o)
@@ -116,13 +96,13 @@ namespace OAuth2_CoreMVC_Sample
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-  
+
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Connect}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Connect}/{action=Index}/{id?}");
             });
         }
     }

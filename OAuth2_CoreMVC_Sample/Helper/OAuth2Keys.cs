@@ -1,5 +1,4 @@
-﻿using System;
-namespace OAuth2_CoreMVC_Sample.Helper
+﻿namespace OAuth2_CoreMVC_Sample.Helper
 {
     public class OAuth2Keys
     {
@@ -13,6 +12,5 @@ namespace OAuth2_CoreMVC_Sample.Helper
         public static string Environment { get; set; }
         public static string CSRFToken { get; set; }
         public static string AuthURL { get; set; }
-
     }
 }

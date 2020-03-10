@@ -4,25 +4,28 @@
 @{
 }
 
-<a asp-controller="QBO" asp-action="CreateCustomer"><div><input type="submit" name="customerBtn" value="Create Customer" /></div></a>
-<br />
+<a asp-controller="QBO" asp-action="CreateCustomer">
+    <div>
+        <input type="submit" name="customerBtn" value="Create Customer"/>
+    </div>
+</a>
+<br/>
 
 @if (ViewData["CustomerId"] != null)
 {
     @Html.Raw(ViewData["CustomerInfo"])
     <br/>
-   
-    <a asp-controller="QBO" asp-action="CreateInvoice" asp-route-customerId="@ViewData["CustomerId"]"><div><input type="submit" name="invoiceBtn" value="Create Invoice" /></div></a>
 
+    <a asp-controller="QBO" asp-action="CreateInvoice" asp-route-customerId="@ViewData["CustomerId"]">
+        <div>
+            <input type="submit" name="invoiceBtn" value="Create Invoice"/>
+        </div>
+    </a>
 }
-<br />
+<br/>
 
 
 @if (ViewData["InvoiceInfo"] != null)
 {
     @Html.Raw(ViewData["InvoiceInfo"])
 }
-
-
-
-

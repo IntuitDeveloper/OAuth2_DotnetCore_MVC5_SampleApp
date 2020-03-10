@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace OAuth2_CoreMVC_Sample.Models
+﻿namespace OAuth2_CoreMVC_Sample.Models
 {
-    public partial class Token
+    public class Token
     {
         public string RealmId { get; set; }
         public string AccessToken { get; set; }
