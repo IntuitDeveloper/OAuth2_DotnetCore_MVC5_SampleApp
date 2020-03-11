@@ -44,8 +44,7 @@ namespace OAuth2_CoreMVC_Sample
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<TokensContext>(options =>
-                options.UseSqlite("Data Source=QBOTokenStore.db"));
+            services.AddDbContext<TokensContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DBConnectionString")));
 
             services.AddTransient<IServices, Services>();
             services.Configure<OAuth2Keys>(Configuration.GetSection("OAuth2Keys"));
