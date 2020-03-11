@@ -17,13 +17,11 @@ namespace OAuth2_CoreMVC_Sample.Controllers
     public class QBOController : Controller
     {
         private readonly IServices _services;
-        private readonly TokensContext _tokens;
         private string id;
 
-        public QBOController(IServices services, TokensContext tokens)
+        public QBOController(IServices services)
         {
             _services = services;
-            _tokens = tokens;
         }
 
         // GET: /<controller>/
@@ -67,10 +65,9 @@ namespace OAuth2_CoreMVC_Sample.Controllers
             var customerService = new QueryService<Customer>(context);
             var query = "Select * from Customer where Id='" + id + "'";
             var queryResponse = customerService.ExecuteIdsQuery(query).ToList();
-            Invoice invoice = null;
             if (queryResponse != null)
             {
-                invoice = Inputs.CreateInvoice(dataService, queryService, queryResponse[0]);
+                var invoice = Inputs.CreateInvoice(dataService, queryService, queryResponse[0]);
                 ViewData["InvoiceInfo"] = "Invoice with ID:" + invoice.Id + " created successfully";
             }
             else

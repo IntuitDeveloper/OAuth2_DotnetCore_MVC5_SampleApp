@@ -11,13 +11,11 @@ namespace OAuth2_CoreMVC_Sample.Controllers
 {
     public class ConnectController : Controller
     {
-        private readonly IServices _services;
         private readonly TokensContext _tokens;
         private readonly OAuth2Keys _auth2Keys;
         public OAuth2Client oAuth2Client;
-        public ConnectController(IServices services, TokensContext tokens, IOptions<OAuth2Keys> auth2Keys)
+        public ConnectController(TokensContext tokens, IOptions<OAuth2Keys> auth2Keys)
         {
-            _services = services;
             _tokens = tokens;
             _auth2Keys = auth2Keys.Value;
         }
@@ -59,7 +57,6 @@ namespace OAuth2_CoreMVC_Sample.Controllers
                         scopes.Add(OidcScopes.Accounting);
                         var authorizeUrl = oAuth2Client.GetAuthorizationURL(scopes);
                         OAuth2Keys.AuthURL = authorizeUrl;
-                        //  return Challenge(new AuthenticationProperties() { RedirectUri = authorizeUrl });
                         return Redirect(authorizeUrl);
                     default:
                         return View("Connect");
