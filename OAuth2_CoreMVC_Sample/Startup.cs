@@ -52,31 +52,7 @@ namespace OAuth2_CoreMVC_Sample
             services.AddMvc();
             services.AddSingleton(provider => Configuration);
 
-            services.AddAuthentication(sharedOptions => { sharedOptions.DefaultChallengeScheme = "QBO"; })
-                .AddCookie()
-                .AddOAuth("QBO", options =>
-                {
-                    options.ClientId = Configuration.GetSection("OAuth2Keys")["ClientId"];
-                    options.ClientSecret = Configuration.GetSection("OAuth2Keys")["ClientSecret"];
-                    options.CallbackPath = new PathString("/");
-                    options.AuthorizationEndpoint = OAuth2Keys.AuthURL;
-                    options.SaveTokens = true;
-                    options.Events = new OAuthEvents
-                    {
-                        OnRedirectToAuthorizationEndpoint = context =>
-                        {
-                            context.HttpContext.Response.Redirect(context.RedirectUri);
-                            return Task.CompletedTask;
-                        }
-                    };
-                });
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-        }
-
-        private void CheckCookies(CookieAuthenticationOptions o)
-        {
-            throw new NotImplementedException();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
