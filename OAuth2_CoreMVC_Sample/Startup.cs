@@ -48,7 +48,7 @@ namespace OAuth2_CoreMVC_Sample
 
             services.AddTransient<IServices, Services>();
             services.Configure<OAuth2Keys>(Configuration.GetSection("OAuth2Keys"));
-
+          
             services.AddMvc();
             services.AddSingleton(provider => Configuration);
 
@@ -56,8 +56,8 @@ namespace OAuth2_CoreMVC_Sample
                 .AddCookie()
                 .AddOAuth("QBO", options =>
                 {
-                    options.ClientId = OAuth2Keys.ClientId;
-                    options.ClientSecret = OAuth2Keys.ClientSecret;
+                    options.ClientId = Configuration.GetSection("OAuth2Keys")["ClientId"];
+                    options.ClientSecret = Configuration.GetSection("OAuth2Keys")["ClientSecret"];
                     options.CallbackPath = new PathString("/");
                     options.AuthorizationEndpoint = OAuth2Keys.AuthURL;
                     options.SaveTokens = true;

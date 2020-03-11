@@ -7,6 +7,7 @@ using Intuit.Ipp.Exception;
 using Intuit.Ipp.OAuth2PlatformClient;
 using Intuit.Ipp.Security;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using OAuth2_CoreMVC_Sample.Models;
 
 namespace OAuth2_CoreMVC_Sample.Helper
@@ -14,10 +15,11 @@ namespace OAuth2_CoreMVC_Sample.Helper
     public class Services : IServices
     {
         private readonly TokensContext _tokens;
-
-        public Services(TokensContext tokens)
+        private readonly OAuth2Keys _auth2Keys;
+        public Services(TokensContext tokens, IOptions<OAuth2Keys> auth2Keys)
         {
             _tokens = tokens;
+            _auth2Keys = auth2Keys.Value;
         }
 
         /// <summary>
@@ -27,16 +29,16 @@ namespace OAuth2_CoreMVC_Sample.Helper
         public async Task QBOApiCall(Action<ServiceContext> apiCallFunction)
         {
             var oauthClient = new OAuth2Client(
-                OAuth2Keys.ClientId, 
-                OAuth2Keys.ClientSecret, 
-                OAuth2Keys.RedirectUrl,
-                OAuth2Keys.Environment);
+                _auth2Keys.ClientId, 
+                _auth2Keys.ClientSecret, 
+                _auth2Keys.RedirectUrl,
+                _auth2Keys.Environment);
 
-            var token = await _tokens.Token.FirstOrDefaultAsync(t => t.RealmId == OAuth2Keys.RealmId);
+            var token = await _tokens.Token.FirstOrDefaultAsync(t => t.RealmId == _auth2Keys.RealmId);
             
             try
             {
-                if (OAuth2Keys.RealmId != "")
+                if (_auth2Keys.RealmId != "")
                     if (token.AccessToken != null && token.RealmId != null)
                     {
                         var reqValidator = new OAuth2RequestValidator(token.AccessToken);
@@ -44,7 +46,7 @@ namespace OAuth2_CoreMVC_Sample.Helper
                             new JsonFileConfigurationProvider(Directory.GetCurrentDirectory() + "\\appsettings.json");
                         var context = new ServiceContext(token.RealmId, IntuitServicesType.QBO, reqValidator,
                             configurationProvider);
-                        context.IppConfiguration.BaseUrl.Qbo = OAuth2Keys.QBOBaseUrl;
+                        context.IppConfiguration.BaseUrl.Qbo = _auth2Keys.QBOBaseUrl;
                         apiCallFunction(context);
                     }
             }

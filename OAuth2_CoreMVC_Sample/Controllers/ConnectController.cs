@@ -13,12 +13,13 @@ namespace OAuth2_CoreMVC_Sample.Controllers
     {
         private readonly IServices _services;
         private readonly TokensContext _tokens;
+        private readonly OAuth2Keys _auth2Keys;
         public OAuth2Client oAuth2Client;
-
-        public ConnectController(IServices services, TokensContext tokens)
+        public ConnectController(IServices services, TokensContext tokens, IOptions<OAuth2Keys> auth2Keys)
         {
             _services = services;
             _tokens = tokens;
+            _auth2Keys = auth2Keys.Value;
         }
 
         public ActionResult Home()
@@ -46,10 +47,10 @@ namespace OAuth2_CoreMVC_Sample.Controllers
         [HttpGet]
         public IActionResult Login(string connect)
         {
-            if (!string.IsNullOrEmpty(OAuth2Keys.ClientId) && !string.IsNullOrEmpty(OAuth2Keys.ClientSecret))
+            if (!string.IsNullOrEmpty(_auth2Keys.ClientId) && !string.IsNullOrEmpty(_auth2Keys.ClientSecret))
             {
-                oAuth2Client = new OAuth2Client(OAuth2Keys.ClientId, OAuth2Keys.ClientSecret, OAuth2Keys.RedirectUrl,
-                    OAuth2Keys.Environment);
+                oAuth2Client = new OAuth2Client(_auth2Keys.ClientId, _auth2Keys.ClientSecret, _auth2Keys.RedirectUrl,
+                    _auth2Keys.Environment);
 
                 switch (connect)
                 {
@@ -71,10 +72,10 @@ namespace OAuth2_CoreMVC_Sample.Controllers
 
         private async Task GetAuthTokensAsync(string code, string realmId)
         {
-            oAuth2Client = new OAuth2Client(OAuth2Keys.ClientId, OAuth2Keys.ClientSecret, OAuth2Keys.RedirectUrl,
-                OAuth2Keys.Environment);
+            oAuth2Client = new OAuth2Client(_auth2Keys.ClientId, _auth2Keys.ClientSecret, _auth2Keys.RedirectUrl,
+                _auth2Keys.Environment);
             var tokenResponse = await oAuth2Client.GetBearerTokenAsync(code);
-            OAuth2Keys.RealmId = realmId;
+            _auth2Keys.RealmId = realmId;
             var token = _tokens.Token.FirstOrDefault(t => t.RealmId == realmId);
             if (token == null)
             {
