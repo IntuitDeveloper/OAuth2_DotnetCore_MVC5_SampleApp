@@ -26,9 +26,14 @@ namespace OAuth2_CoreMVC_Sample.Helper
         /// <param name="apiCallFunction"></param>
         public async Task QBOApiCall(Action<ServiceContext> apiCallFunction)
         {
-            var oauthClient = new OAuth2Client(OAuth2Keys.ClientId, OAuth2Keys.ClientSecret, OAuth2Keys.RedirectUrl,
+            var oauthClient = new OAuth2Client(
+                OAuth2Keys.ClientId, 
+                OAuth2Keys.ClientSecret, 
+                OAuth2Keys.RedirectUrl,
                 OAuth2Keys.Environment);
+
             var token = await _tokens.Token.FirstOrDefaultAsync(t => t.RealmId == OAuth2Keys.RealmId);
+            
             try
             {
                 if (OAuth2Keys.RealmId != "")
