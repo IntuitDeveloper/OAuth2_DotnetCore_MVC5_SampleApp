@@ -11,14 +11,12 @@ namespace OAuth2_CoreMVC_Sample.Controllers
 {
     public class ConnectController : Controller
     {
-        private readonly OAuth2Keys _oAuth2Keys;
         private readonly IServices _services;
         private readonly TokensContext _tokens;
         public OAuth2Client oAuth2Client;
 
-        public ConnectController(IOptions<OAuth2Keys> oAuth2Keys, IServices services, TokensContext tokens)
+        public ConnectController(IServices services, TokensContext tokens)
         {
-            _oAuth2Keys = oAuth2Keys.Value;
             _services = services;
             _tokens = tokens;
         }
