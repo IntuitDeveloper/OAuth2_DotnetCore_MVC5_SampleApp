@@ -1,14 +1,16 @@
-﻿
-<div class="jumbotron">
+﻿<div class="jumbotron">
     <h2>QuickBooks Sample Application</h2>
     <h2>Demonstrates Connect to QuickBooks flow and API (Customer and Invoice) request</h2>
 </div>
 
-<a asp-action="Login" asp-controller="Connect" asp-route-connect="Connect to QuickBooks"><img src="~/Images/C2QB_white_btn_lg_default.png" width="200" height="40"/></a>
+<a asp-action="Login" asp-controller="Connect" asp-route-connect="Connect to QuickBooks">
+    <img src="~/Images/C2QB_white_btn_lg_default.png" width="200" height="40"/>
+</a>
 
-@if(ViewData["Configuration"] == "NullValue")
+@if (ViewData["Configuration"] == "NullValue")
 {
-<p style="font-weight:normal;color:red">
-    <br />
-    Please verify the Client Id and  Client Secret value in appsettings.json file.
-</p>  }
+    <p style="font-weight:normal;color:red">
+        <br/>
+        Please verify the Client Id and Client Secret value in appsettings.json file.
+    </p>
+}

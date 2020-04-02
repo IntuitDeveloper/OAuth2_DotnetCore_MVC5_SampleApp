@@ -1,13 +1,8 @@
-﻿using Intuit.Ipp.Core;
+﻿using System;
+using System.Linq;
 using Intuit.Ipp.Data;
 using Intuit.Ipp.DataService;
 using Intuit.Ipp.QueryFilter;
-using OAuth2_CoreMVC_Sample.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OAuth2_CoreMVC_Sample.Helper
 {
@@ -15,47 +10,45 @@ namespace OAuth2_CoreMVC_Sample.Helper
     {
         internal static Customer CreateCustomer(DataService dataService)
         {
-            Random rnd = new Random();
-            Customer newCust = new Customer
+            var rnd = new Random();
+            var newCust = new Customer
             {
-
                 DisplayName = "Testing Company" + rnd.NextDouble(),
                 GivenName = "Testing Company" + rnd.NextDouble(),
-                FamilyName = "Testing Company" + rnd.NextDouble(),
+                FamilyName = "Testing Company" + rnd.NextDouble()
             };
-            Customer response = dataService.Add(newCust);
+            var response = dataService.Add(newCust);
             return response;
         }
 
-        internal static Invoice CreateInvoice(DataService dataService, QueryService<Account> queryService, Customer customer)
+        internal static Invoice CreateInvoice(DataService dataService, QueryService<Account> queryService,
+            Customer customer)
         {
-           
-           Item item = ItemCreate(dataService, queryService);
-            Line line = new Line
+            var item = ItemCreate(dataService, queryService);
+            var line = new Line
             {
                 DetailType = LineDetailTypeEnum.SalesItemLineDetail,
                 DetailTypeSpecified = true,
                 Description = "Sample for Reimburse Charge with Invoice.",
-                Amount = new Decimal(40),
+                Amount = new decimal(40),
                 AmountSpecified = true
-               
             };
-            SalesItemLineDetail lineDetail = new SalesItemLineDetail
+            var lineDetail = new SalesItemLineDetail
             {
-                ItemRef = new ReferenceType { name = item.Name, Value = item.Id }
+                ItemRef = new ReferenceType {name = item.Name, Value = item.Id}
             };
             line.AnyIntuitObject = lineDetail;
 
-            Line[] lines = { line };
+            Line[] lines = {line};
 
-            Invoice invoice = new Invoice
+            var invoice = new Invoice
             {
                 Line = lines,
-                CustomerRef = new ReferenceType { name = customer.DisplayName, Value = customer.Id },
+                CustomerRef = new ReferenceType {name = customer.DisplayName, Value = customer.Id},
                 TxnDate = DateTime.Now.Date
             };
 
-            Invoice response = dataService.Add(invoice);
+            var response = dataService.Add(invoice);
             return response;
         }
 
@@ -64,40 +57,48 @@ namespace OAuth2_CoreMVC_Sample.Helper
 
         internal static Item ItemCreate(DataService dataService, QueryService<Account> queryService)
         {
-            Random random = new Random();
-            Account expenseAccount = QueryOrAddAccount(dataService, queryService, "select * from account where AccountType='Cost of Goods Sold'", AccountTypeEnum.CostofGoodsSold, AccountClassificationEnum.Expense, AccountSubTypeEnum.SuppliesMaterialsCogs);
-            Account incomeAccount = QueryOrAddAccount(dataService, queryService, "select * from account where AccountType='Income'", AccountTypeEnum.Income, AccountClassificationEnum.Revenue, AccountSubTypeEnum.SalesOfProductIncome);
-            Item item = new Item
+            var random = new Random();
+            var expenseAccount = QueryOrAddAccount(dataService, queryService,
+                "select * from account where AccountType='Cost of Goods Sold'", AccountTypeEnum.CostofGoodsSold,
+                AccountClassificationEnum.Expense, AccountSubTypeEnum.SuppliesMaterialsCogs);
+            var incomeAccount = QueryOrAddAccount(dataService, queryService,
+                "select * from account where AccountType='Income'", AccountTypeEnum.Income,
+                AccountClassificationEnum.Revenue, AccountSubTypeEnum.SalesOfProductIncome);
+            var item = new Item
             {
                 Name = "Item_" + random.NextDouble(),
-                ExpenseAccountRef = new ReferenceType { name = expenseAccount.Name, Value = expenseAccount.Id },
-                IncomeAccountRef = new ReferenceType { name = incomeAccount.Name, Value = incomeAccount.Id },
+                ExpenseAccountRef = new ReferenceType {name = expenseAccount.Name, Value = expenseAccount.Id},
+                IncomeAccountRef = new ReferenceType {name = incomeAccount.Name, Value = incomeAccount.Id},
                 Type = ItemTypeEnum.NonInventory,
                 TypeSpecified = true,
-                UnitPrice = new Decimal(100.0),
+                UnitPrice = new decimal(100.0),
                 UnitPriceSpecified = true
             };
 
-            Item apiResponse = dataService.Add(item);
+            var apiResponse = dataService.Add(item);
             return apiResponse;
         }
 
-        internal static Account QueryOrAddAccount(DataService dataService, QueryService<Account> queryService, String query, AccountTypeEnum accountType, AccountClassificationEnum classification, AccountSubTypeEnum subType)
+        internal static Account QueryOrAddAccount(DataService dataService, QueryService<Account> queryService,
+            string query, AccountTypeEnum accountType, AccountClassificationEnum classification,
+            AccountSubTypeEnum subType)
         {
-            List<Account> queryResponse = queryService.ExecuteIdsQuery(query).ToList<Account>();
+            var queryResponse = queryService.ExecuteIdsQuery(query).ToList();
 
             if (queryResponse.Count == 0)
             {
-                Account account = AccountCreate(dataService, accountType, classification, subType);
+                var account = AccountCreate(dataService, accountType, classification, subType);
                 return account;
             }
+
             return queryResponse[0];
         }
 
-        internal static Account AccountCreate(DataService dataService, AccountTypeEnum accountType, AccountClassificationEnum classification, AccountSubTypeEnum subType)
+        internal static Account AccountCreate(DataService dataService, AccountTypeEnum accountType,
+            AccountClassificationEnum classification, AccountSubTypeEnum subType)
         {
-            Random random = new Random();
-            Account account = new Account
+            var random = new Random();
+            var account = new Account
             {
                 Name = "Account_" + random.NextDouble(),
                 AccountType = accountType,
@@ -107,11 +108,9 @@ namespace OAuth2_CoreMVC_Sample.Helper
                 AccountSubType = subType.ToString(),
                 SubAccountSpecified = true
             };
-            Account apiResponse = dataService.Add(account);
+            var apiResponse = dataService.Add(account);
             return apiResponse;
         }
-
-  
 
         #endregion
     }

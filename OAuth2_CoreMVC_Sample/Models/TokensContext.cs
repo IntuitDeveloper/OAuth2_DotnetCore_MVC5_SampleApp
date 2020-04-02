@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace OAuth2_CoreMVC_Sample.Models
 {
-    public partial class TokensContext : DbContext
+    public class TokensContext : DbContext
     {
         public TokensContext()
         {
@@ -21,7 +19,6 @@ namespace OAuth2_CoreMVC_Sample.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
             }
         }
 

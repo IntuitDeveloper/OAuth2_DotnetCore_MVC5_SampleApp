@@ -27,7 +27,7 @@ We will need to update the below items items:
 2. ClientSecret
 3. RedirectURL
 4. Environment
-5. DBConnectionString
+5. DBConnectionString (Optional)
 6. QBOBaseURL
 
 ### Client Credentials
@@ -40,20 +40,8 @@ You'll have to set a Redirect URI in both 'web.config' and the Developer Portal 
 This sample app requires Accounting scope, please choose this if creating a new app.
 
 ### DBConnectionString
-This sample app requires database connectivity to store the tokens(AccessToken and RefreshToken) used for doing our API calls and also update the token with new tokens when the token expires.
-
-If you are using Localdb Instance then create a database in it using the below steps:
-1. Open Visual Studio -> Tools -> Connect to Database...
-2. Select Microsoft SQL Server and click Continue.
-3. Enter (localdb)\mssqllocaldb as the Server Name.
-4. Enter master as the Database Name and click OK.
-5. The master database is now displayed under Data Connections in Server Explorer.
-6. Right-click on the database in Server Explorer and select New Query.
-7. Copy the script from [Tokens.sql](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/Database/Tokens.sql) into the query editor and select Execute.
-8. Once the database is created successfully, Open Visual Studio -> Tools –> NuGet Package Manager –> Package Manager Console and run the following command:
-Scaffold-DbContext “Server=(localdb)\mssqllocaldb;Database=Tokens;Trusted_Connection=True;” Microsoft.EntityFrameworkCore.SqlServer - OutputDir Models
-
-If you are using an existing database,then update the connectionstring with your database connection in your [appsettings.json](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/appsettings.json)
+This sample app uses a SQLite database to store the tokens(AccessToken and RefreshToken) used for doing our API calls and also update the token with new tokens when the token expires.
+This database is created for you the first time your run the sample.
 
 ## Run your app!
 After setting up both Developer Portal and your [appsettings.json](https://github.com/IntuitDeveloper/Oauth2_DotnetCore_MVC5_SampleApp/blob/master/OAuth2_CoreMVC_Sample/appsettings.json), run the sample app. 
