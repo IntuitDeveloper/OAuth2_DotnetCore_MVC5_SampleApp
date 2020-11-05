@@ -7,7 +7,7 @@
     <img src="~/Images/C2QB_white_btn_lg_default.png" width="200" height="40"/>
 </a>
 
-@if (ViewData["Configuration"] == "NullValue")
+@if ((string)ViewData["Configuration"] == "NullValue")
 {
     <p style="font-weight:normal;color:red">
         <br/>
