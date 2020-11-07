@@ -1,14 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OAuth2_CoreMVC_Sample.Helper;
 using OAuth2_CoreMVC_Sample.Models;
 
@@ -19,17 +17,6 @@ namespace OAuth2_CoreMVC_Sample
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
-
-        public Startup(IHostingEnvironment env, IConfiguration configuration)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-                .AddEnvironmentVariables();
-            builder.AddUserSecrets<Startup>();
-            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -49,14 +36,14 @@ namespace OAuth2_CoreMVC_Sample
             services.AddTransient<IServices, Services>();
             services.Configure<OAuth2Keys>(Configuration.GetSection("OAuth2Keys"));
           
-            services.AddMvc();
             services.AddSingleton(provider => Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllersWithViews();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -72,12 +59,13 @@ namespace OAuth2_CoreMVC_Sample
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    "default",
-                    "{controller=Connect}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
