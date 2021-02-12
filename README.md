@@ -12,9 +12,9 @@ Before beginning, it may be helpful to have a basic understanding of OAuth 2.0 f
 
 ## PreRequisites
 
-1. Visual Studio 2015 or above
+1. Visual Studio 2019 or above
 2. Microsoft.Net.Compilers 2.10.0
-3. .Net Core 2.2
+3. .Net Core 3.1
 
 ## Setup
 Clone this repository/Download the sample app.
