@@ -1,4 +1,4 @@
-[![Sample Banner](views/Sample.png)][ss1]
+[![Rate your Sample](views/Ratesample.png)][ss1][![Yes](views/Thumbup.png)][ss2][![No](views/Thumbdown.png)][ss3]
 
 # OAuth2_DotnetCore_MVC5_SampleApp
 DotNet Core MVC5 Sample app using .NET Standard SDK
@@ -52,4 +52,6 @@ This flow goes through authorization flow where QBO user logs in and authorizes 
 ### QBO API request
 Access tokens from Connect to QuickBooks flow are used to make a Customer and Invoice request which allows to create a customer and invoice in your company. If any tokens are expired, then it refresh those tokens based on the refresh token.
 
-[ss1]: https://help.developer.intuit.com/s/samplefeedback?cid=9010&repoName=OAuth2_CoreMVC_Sample
+[ss1]: #
+[ss2]: https://customersurveys.intuit.com/jfe/form/SV_9LWgJBcyy3NAwHc?check=Yes&checkpoint=OAuth2_CoreMVC_Sample&pageUrl=github
+[ss3]: https://customersurveys.intuit.com/jfe/form/SV_9LWgJBcyy3NAwHc?check=No&checkpoint=OAuth2_CoreMVC_Sample&pageUrl=github
