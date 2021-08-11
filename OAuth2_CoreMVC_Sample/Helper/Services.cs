@@ -9,6 +9,8 @@ using Intuit.Ipp.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using OAuth2_CoreMVC_Sample.Models;
+using Serilog;
+using Serilog.Core;
 
 namespace OAuth2_CoreMVC_Sample.Helper
 {
@@ -16,6 +18,7 @@ namespace OAuth2_CoreMVC_Sample.Helper
     {
         private readonly TokensContext _tokens;
         private readonly OAuth2Keys _auth2Keys;
+        private Serilog.Core.Logger logger;
         public Services(TokensContext tokens, IOptions<OAuth2Keys> auth2Keys)
         {
             _tokens = tokens;
@@ -35,7 +38,17 @@ namespace OAuth2_CoreMVC_Sample.Helper
                 _auth2Keys.Environment);
 
             var token = await _tokens.Token.FirstOrDefaultAsync(t => t.RealmId == _auth2Keys.RealmId);
-            
+            string filePath = Path.Combine("C:\\Users\\rkasaraneni\\Documents\\Logs", "Testing-" + DateTime.Now.Ticks.ToString() + ".txt");
+
+
+
+            //Setting logger config for Serilog
+            var loggerConfig = new LoggerConfiguration()
+                         .MinimumLevel.Verbose()
+                         .WriteTo.File(filePath);
+
+            logger = loggerConfig.CreateLogger();
+            oauthClient.CustomLogger = logger;
             try
             {
                 if (_auth2Keys.RealmId != "")

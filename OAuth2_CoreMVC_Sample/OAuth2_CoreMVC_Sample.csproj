@@ -9,9 +9,59 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="IppDotNetSdkForQuickBooksApiV3" Version="14.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Intuit.Ipp.Core">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.Data">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.DataService">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.DataService.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.Diagnostics">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.EntitlementService">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.EntitlementService.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.Exception">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Exception.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.GlobalTaxService">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.GlobalTaxService.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.OAuth2PlatformClient">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.OAuth2PlatformClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.OAuth2PlatformClient.Diagnostics">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.OAuth2PlatformClient.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.QueryFilter">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.QueryFilter.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.ReportService">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.ReportService.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.Retry">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Retry.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.Security">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.Utility">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Intuit.Ipp.WebHooksService">
+      <HintPath>..\..\Desktop\gggg\Intuit.Ipp.WebHooksService.dll</HintPath>
+    </Reference>
   </ItemGroup>
   
 </Project>
